@@ -17,99 +17,99 @@ var equal = assert.deepEqual;
 const SeqTools = require('../lib/index-new')
 const st = new SeqTools
 
-describe('msa-seqtools module', function() {
-  describe('#getMeta()', function() {
-    it('should split correctly', function() {
-      equal(st.getMeta("sp|abc|def"), {
-        name: "def",
+describe('msa-seqtools module', () => {
+  describe('#getMeta()', () => {
+    it('should split correctly', () => {
+      equal(st.getMeta('sp|abc|def'), {
+        name: 'def',
         ids: {
-          sp: "abc"
+          sp: 'abc'
         },
         details: {
-          accession: "def",
-          en: "def"
+          accession: 'def',
+          en: 'def'
         }
       });
     });
-    it('should should recognize key=value', function() {
-      equal(st.getMeta("sp|abc|def a long description OS=organism GN=genename"), {
-        name: "def",
+    it('should should recognize key=value', () => {
+      equal(st.getMeta('sp|abc|def a long description OS=organism GN=genename'), {
+        name: 'def',
         ids: {
-          sp: "abc"
+          sp: 'abc'
         },
         details: {
-          os: "organism",
-          gn: "genename",
-          accession: "def",
-          en: "def"
+          os: 'organism',
+          gn: 'genename',
+          accession: 'def',
+          en: 'def'
         },
-        desc: "a long description"
+        desc: 'a long description'
       });
     });
-    it('should deal with spaces in key=value', function() {
-      equal(st.getMeta("sp|abc|def Carotenoid cleavage dioxygenase 8, chloroplastic OS=Arabidopsis thaliana GN=CCD8 PE=1 SV=1 "), {
-        name: "def",
-        desc: "Carotenoid cleavage dioxygenase 8, chloroplastic",
+    it('should deal with spaces in key=value', () => {
+      equal(st.getMeta('sp|abc|def Carotenoid cleavage dioxygenase 8, chloroplastic OS=Arabidopsis thaliana GN=CCD8 PE=1 SV=1 '), {
+        name: 'def',
+        desc: 'Carotenoid cleavage dioxygenase 8, chloroplastic',
         ids: {
-          sp: "abc"
+          sp: 'abc'
         },
         details: {
-          os: "Arabidopsis thaliana",
-          gn: "CCD8",
-          pe: "1",
-          sv: "1",
-          accession: "def",
-          en: "def"
+          os: 'Arabidopsis thaliana',
+          gn: 'CCD8',
+          pe: '1',
+          sv: '1',
+          accession: 'def',
+          en: 'def'
         }
       });
     });
-    it('correctly parse descriptions without key=value', function() {
-      equal(st.getMeta("sp|abc|def a long description with no key values"), {
-        name: "def",
+    it('correctly parse descriptions without key=value', () => {
+      equal(st.getMeta('sp|abc|def a long description with no key values'), {
+        name: 'def',
         ids: {
-          sp: "abc"
+          sp: 'abc'
         },
         details: {
-          accession: "def",
-          en: "def"
+          accession: 'def',
+          en: 'def'
         },
-        desc: "a long description with no key values"
+        desc: 'a long description with no key values'
       });
     });
 	
   });
-  describe('#buildLinks()', function() {
-    it('should show correct links', function () {
-      const ids = st.buildLinks(st.getMeta("sp|abc|def").ids);
+  describe('#buildLinks()', () => {
+    it('should show correct links', () => {
+      const ids = st.buildLinks(st.getMeta('sp|abc|def').ids);
       assert.exists(ids['Uniprot'])
       equal(ids['Uniprot'], 'http://www.uniprot.org/abc')
     });
   });
-  describe('#contains()', function() {
-    it('should find text', function() {
-      assert.ok(st.contains("abc", "a"));
+  describe('#contains()', () => {
+    it('should find text', () => {
+      assert.ok(st.contains('abc', 'a'));
     });
-    it('should not find non-existing text', function() {
-      assert.notOk(st.contains("abc", "e"));
-    });
-  });
-  describe('#splitNChars()', function() {
-    it('should split correctly', function() {
-      equal(st.splitNChars("abc", 2), ["ab", "c"]);
+    it('should not find non-existing text', () => {
+      assert.notOk(st.contains('abc', 'e'));
     });
   });
-  describe('#complement()', function() {
-    it('should complement sequence correctly', function() {
+  describe('#splitNChars()', () => {
+    it('should split correctly', () => {
+      equal(st.splitNChars('abc', 2), ['ab', 'c']);
+    });
+  });
+  describe('#complement()', () => {
+    it('should complement sequence correctly', () => {
       equal(st.complement('actgACTG'), 'tgacTGAC')
     })
   });
-  describe('#reverse()', function() {
-    it('should reverse a sequence', function() {
+  describe('#reverse()', () => {
+    it('should reverse a sequence', () => {
       equal(st.reverse('actgACTG'), 'GTCAgtca')
     })
   });
-  describe('#reverseComplement()', function() {
-    it('should reverse a sequence', function() {
+  describe('#reverseComplement()', () => {
+    it('should reverse a sequence', () => {
       equal(st.reverseComplement('actgACTG'), 'CAGTcagt')
     })
   });
