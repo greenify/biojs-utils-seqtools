@@ -79,10 +79,10 @@ describe('msa-seqtools module', function() {
 	
   });
   describe('#buildLinks()', function() {
-    it('should show correct links', function() {
-      equal(st.buildLinks(st.getMeta("sp|abc|def").ids), {
-        "Uniprot": "http://www.uniprot.org/abc"
-      });
+    it('should show correct links', function () {
+      const ids = st.buildLinks(st.getMeta("sp|abc|def").ids);
+      assert.exists(ids['Uniprot'])
+      equal(ids['Uniprot'], 'http://www.uniprot.org/abc')
     });
   });
   describe('#contains()', function() {
