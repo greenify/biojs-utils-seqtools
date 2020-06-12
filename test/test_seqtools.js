@@ -7,15 +7,14 @@
  */
 
 // chai is an assertion library
-var chai = require('chai');
+const chai = require('chai');
 
 // @see http://chaijs.com/api/assert/
-var assert = chai.assert;
-var equal = assert.deepEqual;
+const assert = chai.assert;
+const equal = assert.deepEqual;
 
 // requires your main app (specified in index.js)
-const SeqTools = require('../lib/index-new')
-const st = new SeqTools
+const st = require('../lib/index');
 
 describe('msa-seqtools module', () => {
   describe('#getMeta()', () => {
@@ -26,7 +25,6 @@ describe('msa-seqtools module', () => {
           sp: 'abc'
         },
         details: {
-          accession: 'def',
           en: 'def'
         }
       });
@@ -40,7 +38,6 @@ describe('msa-seqtools module', () => {
         details: {
           os: 'organism',
           gn: 'genename',
-          accession: 'def',
           en: 'def'
         },
         desc: 'a long description'
@@ -58,7 +55,6 @@ describe('msa-seqtools module', () => {
           gn: 'CCD8',
           pe: '1',
           sv: '1',
-          accession: 'def',
           en: 'def'
         }
       });
@@ -70,19 +66,18 @@ describe('msa-seqtools module', () => {
           sp: 'abc'
         },
         details: {
-          accession: 'def',
           en: 'def'
         },
         desc: 'a long description with no key values'
       });
     });
-	
+
   });
   describe('#buildLinks()', () => {
     it('should show correct links', () => {
-      const ids = st.buildLinks(st.getMeta('sp|abc|def').ids);
-      assert.exists(ids['Uniprot'])
-      equal(ids['Uniprot'], 'http://www.uniprot.org/abc')
+      equal(st.buildLinks(st.getMeta('sp|abc|def').ids), {
+        'Uniprot': 'http://www.uniprot.org/abc'
+      })
     });
   });
   describe('#contains()', () => {
@@ -100,17 +95,17 @@ describe('msa-seqtools module', () => {
   });
   describe('#complement()', () => {
     it('should complement sequence correctly', () => {
-      equal(st.complement('actgACTG'), 'tgacTGAC')
-    })
+      equal(st.complement('actgACTG'), 'tgacTGAC');
+    });
   });
   describe('#reverse()', () => {
     it('should reverse a sequence', () => {
-      equal(st.reverse('actgACTG'), 'GTCAgtca')
-    })
+      equal(st.reverse('actgACTG'), 'GTCAgtca');
+    });
   });
   describe('#reverseComplement()', () => {
     it('should reverse a sequence', () => {
-      equal(st.reverseComplement('actgACTG'), 'CAGTcagt')
-    })
+      equal(st.reverseComplement('actgACTG'), 'CAGTcagt');
+    });
   });
 });
