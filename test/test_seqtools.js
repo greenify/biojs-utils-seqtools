@@ -14,7 +14,8 @@ var assert = chai.assert;
 var equal = assert.deepEqual;
 
 // requires your main app (specified in index.js)
-var st = require('../');
+const SeqTools = require('../lib/index-new')
+const st = new SeqTools
 
 describe('msa-seqtools module', function() {
   describe('#getMeta()', function() {
@@ -25,6 +26,7 @@ describe('msa-seqtools module', function() {
           sp: "abc"
         },
         details: {
+          accession: "def",
           en: "def"
         }
       });
@@ -38,6 +40,7 @@ describe('msa-seqtools module', function() {
         details: {
           os: "organism",
           gn: "genename",
+          accession: "def",
           en: "def"
         },
         desc: "a long description"
@@ -55,6 +58,7 @@ describe('msa-seqtools module', function() {
           gn: "CCD8",
           pe: "1",
           sv: "1",
+          accession: "def",
           en: "def"
         }
       });
@@ -66,6 +70,7 @@ describe('msa-seqtools module', function() {
           sp: "abc"
         },
         details: {
+          accession: "def",
           en: "def"
         },
         desc: "a long description with no key values"
