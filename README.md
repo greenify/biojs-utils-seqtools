@@ -9,7 +9,7 @@
 Install the module with: `npm install msa-seqtools`
 
 ```javascript
-var st = require('msa-seqtools');
+const st = require('msa-seqtools');
 ```
 
 ## Documentation

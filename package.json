@@ -29,10 +29,10 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "browserify": "16.x",
+    "chai": "4.x",
     "mkdirp": "^0.5.0",
-    "browserify": "6.x",
-    "chai": "1.x",
-    "mocha": "1.x"
+    "mocha": "8.x"
   },
   "keywords": [
     "seqs",
